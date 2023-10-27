@@ -8,14 +8,28 @@
 
 function findNumberOfPairsMatchesInputValue(inputArray, sumValue) {
 
+
+  if (!Array.isArray(inputArray) || !inputArray.length>=2 ){
+    console.error("Invalid Array");
+    return false;
+  }
+
+  if (typeof sumValue !== 'number'){
+    console.error("Invalid sum value");
+    return false;
+  }
+
+  //filtered out the non-numeric values
+  inputArray = inputArray.filter((element)=> typeof element === 'number');
     
 
-    //to store each value with it's count to find the pair
-    const numberCount = {}; 
-    //no of pairs
-    let countValue = 0; 
+  //to store each value with it's count to find the pair
+  const numberCount = {}; 
   
-    for (const currentNumber of inputArray) {
+  //no of pairs
+  let countValue = 0; 
+  
+  for (const currentNumber of inputArray) {
       const complementNumber = sumValue - currentNumber;
   
       if (numberCount[complementNumber]) {
@@ -32,11 +46,10 @@ function findNumberOfPairsMatchesInputValue(inputArray, sumValue) {
       else {
         numberCount[currentNumber] = 1;
       }
-
-     
-    }
+    
+  }
   
-    return countValue; //,numberCount;
+  return countValue; //,numberCount;
 }
   
 const inputArray = [4,2,5,6,8,1,-2,0,true,'hello']
