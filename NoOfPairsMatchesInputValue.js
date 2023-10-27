@@ -6,10 +6,10 @@
 // // Pais that matches are [4, 2] => 6. [5, 1] => 6
 // So output 2
 
-function findNumberOfPairsMatchesInputValue(inputArray, sumValue) {
+function findNumberOfPairsMatchesSumValue(inputArray, sumValue) {
 
 
-  if (!Array.isArray(inputArray) || !inputArray.length>=2 ){
+  if (!Array.isArray(inputArray) || !(inputArray.length>=2) ){
     console.error("Invalid Array");
     return false;
   }
@@ -35,17 +35,13 @@ function findNumberOfPairsMatchesInputValue(inputArray, sumValue) {
       if (numberCount[complementNumber]) {
         // If the complement exists in the numberCoumt, increment the count by the number of times the complement was there in array
         countValue += numberCount[complementNumber];
+
         // console.log(numberCount[complement] , countValue);
       }
   
       // Increment the count for the current number in the object
-
-      if (numberCount[currentNumber]) {
-        numberCount[currentNumber]++;
-      } 
-      else {
-        numberCount[currentNumber] = 1;
-      }
+      numberCount[currentNumber] = numberCount[currentNumber] ?
+      numberCount[currentNumber]++ : 1;
     
   }
   
@@ -54,8 +50,22 @@ function findNumberOfPairsMatchesInputValue(inputArray, sumValue) {
   
 const inputArray = [4,2,5,6,8,1,-2,0,true,'hello']
 //[4, 2, 5, 6, 8, 1,-2,0]; => [4,2] , [5,1] , [6,0] , [8,-2]  
-const sumValue = 2;
+const sumValue = 2.5;
 
-console.log(findNumberOfPairsMatchesInputValue(inputArray, sumValue));
+// console.log(findNumberOfPairsMatchesSumValue([1], sumValue));
+// console.log(findNumberOfPairsMatchesSumValue([], sumValue));
+// console.log(findNumberOfPairsMatchesSumValue('hello', sumValue));
+// console.log(findNumberOfPairsMatchesSumValue(true, sumValue));
+// console.log(findNumberOfPairsMatchesSumValue(0, sumValue));
+
+// console.log(findNumberOfPairsMatchesSumValue(inputArray, true));
+// console.log(findNumberOfPairsMatchesSumValue(inputArray, 'hello'));
+// console.log(findNumberOfPairsMatchesSumValue(inputArray, []));
+// console.log(findNumberOfPairsMatchesSumValue(inputArray, ''));
+
+
+
+
+
 
   
