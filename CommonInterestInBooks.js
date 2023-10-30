@@ -56,7 +56,7 @@ const students = [
 ];
 
 
-function findCommonInterestsInBooksForStudents(students){
+function findCommonInterestsAndMostSharedInterestsUsers(students){
    //type and length check 
   
       if(!Array.isArray(students) || students.length === 0){
@@ -64,15 +64,17 @@ function findCommonInterestsInBooksForStudents(students){
         return false;
       }
 
-//common interest
 
+//common interests in books
 const bookInterests = {};
 
 for (const student of students) {
 
+  //destructing
   const { name, books } = student;
   
   for (const book of books) {
+    
     if (!bookInterests[book]) {
       bookInterests[book] = [];
     }
@@ -82,17 +84,60 @@ for (const student of students) {
 }
 
 
-
-console.log('Common interests in books:');
+console.log('Common interests in books:\n');
 for (const book in bookInterests) {
   console.log(`${book} - [${bookInterests[book].join(', ')}]`);
 }
 
+//user who shares the most interests with others
+let maxSharedInterestsCount = 0;
+let userWithMostSharedInterests = '';
+
+//iterate students array of object 
+for (const student of students) {
+
+  const sharedInterests = {};
+ 
+  //iterate books property in student array
+  for (const book of student.books) {
+
+    //get user from bookinterests[book] 
+    for (const user of bookInterests[book]) {
+    // console.log(user);
+
+    //not to check the same user
+      if (user !== student.name) {
+
+        //if the user is not in sharedInterests, then their count will 0
+        if (!sharedInterests[user]) {
+          sharedInterests[user] = 0;
+        }
+        sharedInterests[user]++;
+      }
+    }
+  }
+
+  for (const user in sharedInterests) {
+
+    //finding maxsharedInterest user basend on max count of sharedInterests
+    if (sharedInterests[user] > maxSharedInterestsCount) {
+         maxSharedInterestsCount = sharedInterests[user];
+         userWithMostSharedInterests = student.name;
+    }
+    else if (sharedInterests[user] === maxSharedInterestsCount) {
+      // If there are multiple users with the same number of shared interests, 
+      //then store them in an array
+       userWithMostSharedInterests += `, ${student.name}`;
+    }
+  }
+}
+
+console.log('\nUser who shares the most interests with others:\n', userWithMostSharedInterests);
 
 }
  
 
-findCommonInterestsInBooksForStudents(students);
+findCommonInterestsAndMostSharedInterestsUsers(students);
 
 
 
