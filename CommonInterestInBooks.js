@@ -57,14 +57,17 @@ const students = [
 
 
 function findCommonInterestsInBooksForStudents(students){
-
+   //type and length check 
   
       if(!Array.isArray(students) || students.length === 0){
         console.error("Invalid Array");
         return false;
       }
-  
+
+//common interest
+
 const bookInterests = {};
+
 for (const student of students) {
   const { name, books } = student;
   for (const book of books) {
@@ -75,7 +78,7 @@ for (const student of students) {
   }
 }
 
-
+//shared most interests
 let maxSharedInterestsCount = 0;
 let userWithMostSharedInterests = '';
 
