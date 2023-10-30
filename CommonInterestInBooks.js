@@ -56,52 +56,14 @@ const students = [
 ];
 
 
+function findCommonInterestsInBooksForStudents(students){
 
-// const booksArrayOfObject = students.map((currentObject)=> 
-// currentObject.books);
-// console.log(booksArrayOfObject);
-
-
-
-// //Find common interests in books for the students
-// function findCommonInterestsInBooksForStudents(students){
-
-//       if(!Array.isArray(students) || students.length === 0){
-//         console.error("Invalid Array");
-//         return false;
-//       }
-
-//       const bookInterests = {};
-
-//       let index=0;
-//       for (const student of students) {
-
-//         //destructing name and books of current index
-//         const { name, books } = student;
   
-        //traverse the currentindex's books
-//         for(const book of books) {
-           
-//           if (!bookInterests[book]) {
-//                 bookInterests[book] = [];
-//           }
-
-//           //currentindex's book = ["currentindex's name"]
-//           bookInterests[book].push(name);
-
-//           // console.log(bookInterests);
-//           // console.log(book ,name);
-
-//         }
- 
-//       }
-//     return bookInterests;
-// }
-
-
-// let commonInterests =findCommonInterestsInBooksForStudents(students);
-// console.log(commonInterests);
-
+      if(!Array.isArray(students) || students.length === 0){
+        console.error("Invalid Array");
+        return false;
+      }
+  
 const bookInterests = {};
 for (const student of students) {
   const { name, books } = student;
@@ -137,14 +99,17 @@ for (const student of students) {
     }
   }
 }
-
-
 console.log('Common interests in books:');
 for (const book in bookInterests) {
   console.log(`${book} - [${bookInterests[book].join(', ')}]`);
 }
-
 console.log('User who shares the most interests with others:', userWithMostSharedInterests);
+}
+ 
+
+findCommonInterestsInBooksForStudents(students);
+
+
 
 
 
