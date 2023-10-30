@@ -69,44 +69,26 @@ function findCommonInterestsInBooksForStudents(students){
 const bookInterests = {};
 
 for (const student of students) {
+
   const { name, books } = student;
+  
   for (const book of books) {
     if (!bookInterests[book]) {
       bookInterests[book] = [];
     }
     bookInterests[book].push(name);
   }
+
 }
 
-//shared most interests
-let maxSharedInterestsCount = 0;
-let userWithMostSharedInterests = '';
 
-for (const student of students) {
-  const sharedInterests = {};
-  for (const book of student.books) {
-    for (const user of bookInterests[book]) {
-      if (user !== student.name) {
-        if (!sharedInterests[user]) {
-          sharedInterests[user] = 0;
-        }
-        sharedInterests[user]++;
-      }
-    }
-  }
 
-  for (const user in sharedInterests) {
-    if (sharedInterests[user] > maxSharedInterestsCount) {
-      maxSharedInterestsCount = sharedInterests[user];
-      userWithMostSharedInterests = student.name;
-    }
-  }
-}
 console.log('Common interests in books:');
 for (const book in bookInterests) {
   console.log(`${book} - [${bookInterests[book].join(', ')}]`);
 }
-console.log('User who shares the most interests with others:', userWithMostSharedInterests);
+
+
 }
  
 
