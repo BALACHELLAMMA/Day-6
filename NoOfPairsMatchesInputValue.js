@@ -48,9 +48,12 @@ function findNumberOfPairsMatchesSumValue(inputArray, sumValue) {
   return countValue; //,numberCount;
 }
   
-const inputArray = [4,2,5,6,8,1,-2,0,true,'hello']
+const inputArray = [4, 2, 5, 6, 8, 1];
+//[4,2,5,6,8,1,-2,0,true,'hello']
 //[4, 2, 5, 6, 8, 1,-2,0]; => [4,2] , [5,1] , [6,0] , [8,-2]  
-const sumValue = 2.5;
+const sumValue = 6;
+
+console.log(findNumberOfPairsMatchesSumValue(inputArray,sumValue));
 
 // console.log(findNumberOfPairsMatchesSumValue([1], sumValue));
 // console.log(findNumberOfPairsMatchesSumValue([], sumValue));

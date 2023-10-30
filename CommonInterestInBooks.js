@@ -29,7 +29,8 @@
 //   Against the wind- [‘Cathi’]
 //   The Shining - [‘Cathi’, ‘Ashok’]
 //   Find the user who shares most interest with other users.
-//   For example: Ashok since he shares book interest with Arun, Cathi. And also Arun since he shares interest with Balu and Ashok
+//   For example: Ashok since he shares book interest with Arun, Cathi.
+//   And also Arun since he shares interest with Balu and Ashok
 
 const students = [
         {
@@ -62,48 +63,88 @@ const students = [
 
 
 
+// //Find common interests in books for the students
+// function findCommonInterestsInBooksForStudents(students){
 
+//       if(!Array.isArray(students) || students.length === 0){
+//         console.error("Invalid Array");
+//         return false;
+//       }
 
-//Find common interests in books for the students
-function findCommonInterestsInBooksForStudents(students){
+//       const bookInterests = {};
 
-      if(!Array.isArray(students) || students.length === 0){
-        console.error("Invalid Array");
-        return false;
-      }
+//       let index=0;
+//       for (const student of students) {
 
-      const bookInterests = {};
-
-      for (const student of students) {
-
-        //destructing name and books of current index
-        const { name, books } = student;
-
-        // console.log(books);
+//         //destructing name and books of current index
+//         const { name, books } = student;
   
-        // let index=0;
-  
-        for (const book of books) {
+        //traverse the currentindex's books
+//         for(const book of books) {
            
-          if (!bookInterests[book]) {
-                bookInterests[book] = [];
-          }
+//           if (!bookInterests[book]) {
+//                 bookInterests[book] = [];
+//           }
 
-          bookInterests[book].push(name);
-          //console.log(bookInterests[book])
-          console.log(book ,name);
-        }
+//           //currentindex's book = ["currentindex's name"]
+//           bookInterests[book].push(name);
 
-        
-      }
-    // return bookInterests;
+//           // console.log(bookInterests);
+//           // console.log(book ,name);
+
+//         }
+ 
+//       }
+//     return bookInterests;
+// }
+
+
+// let commonInterests =findCommonInterestsInBooksForStudents(students);
+// console.log(commonInterests);
+
+const bookInterests = {};
+for (const student of students) {
+  const { name, books } = student;
+  for (const book of books) {
+    if (!bookInterests[book]) {
+      bookInterests[book] = [];
+    }
+    bookInterests[book].push(name);
+  }
 }
 
 
-console.log(findCommonInterestsInBooksForStudents(students));
+let maxSharedInterestsCount = 0;
+let userWithMostSharedInterests = '';
+
+for (const student of students) {
+  const sharedInterests = {};
+  for (const book of student.books) {
+    for (const user of bookInterests[book]) {
+      if (user !== student.name) {
+        if (!sharedInterests[user]) {
+          sharedInterests[user] = 0;
+        }
+        sharedInterests[user]++;
+      }
+    }
+  }
+
+  for (const user in sharedInterests) {
+    if (sharedInterests[user] > maxSharedInterestsCount) {
+      maxSharedInterestsCount = sharedInterests[user];
+      userWithMostSharedInterests = student.name;
+    }
+  }
+}
 
 
+console.log('Common interests in books:');
+for (const book in bookInterests) {
+  console.log(`${book} - [${bookInterests[book].join(', ')}]`);
+}
 
+console.log('User who shares the most interests with others:', userWithMostSharedInterests);
 
 
 
